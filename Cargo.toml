@@ -1,0 +1,35 @@
+[package]
+name = "rs-dbus-bench"
+description = "DBus benchmarking programs"
+homepage = "/dev/null"
+license = "Apache-2.0"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "dbusbench-zbus-client"
+path = "src/zbus-client.rs"
+
+[[bin]]
+name = "dbusbench-zbus-server"
+path = "src/zbus-server.rs"
+
+[[bin]]
+name = "dbusbench-dbusrs-client"
+path = "src/dbusrs-client.rs"
+
+[[bin]]
+name = "dbusbench-dbusrs-server"
+path = "src/dbusrs-server.rs"
+
+[dependencies]
+tokio = { version = "1.22", features = ["rt", "macros"], default-features = false }
+dbus = "~0.9.7"
+dbus-tokio = "~0.7.5"
+dbus-crossroads = "~0.5.2"
+futures = { default-features = false, version = "0.3" }
+zbus = { version = "3.14", default-features = false, features = ["tokio"] }
+
+[profile.release]
+opt-level = 'z'
+codegen-units = 1
