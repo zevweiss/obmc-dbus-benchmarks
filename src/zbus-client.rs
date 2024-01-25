@@ -1,5 +1,8 @@
+use std::time::Instant;
 use tokio;
 use zbus::{Connection, dbus_proxy, Result};
+
+mod common;
 
 #[dbus_proxy(interface = "xyz.openbmc_project.Benchmark",
 	     default_service = "xyz.openbmc_project.Benchmark",
@@ -16,13 +19,33 @@ trait Benchmark {
 
 #[tokio::main(flavor = "current_thread")]
 async fn main() -> Result<()> {
+	let (mode, count) = common::get_params();
+
 	let conn = Connection::system().await?;
 	let proxy = BenchmarkProxy::new(&conn).await?;
 
-	println!("Property: {}", proxy.property().await?);
-	proxy.set_property(12).await?;
-	println!("Property: {}", proxy.property().await?);
-	proxy.function_call().await?;
+	let start = Instant::now();
+
+	use common::BenchMode::*;
+	match mode {
+		Call => {
+			for _ in 0..count {
+				proxy.function_call().await.unwrap();
+			}
+		},
+		Get => {
+			for _ in 0..count {
+				proxy.property().await.unwrap();
+			}
+		},
+		Set => {
+			for _ in 0..count {
+				proxy.set_property(13).await.unwrap();
+			}
+		},
+	};
+
+	println!("{}", (Instant::now() - start).as_secs_f32());
 
 	Ok(())
 }
