@@ -28,3 +28,11 @@ executable(
   dependencies: deps,
   install: true,
   install_dir: get_option('bindir'))
+
+executable(
+  'sdbusplus-client',
+  'sdbusplus-client.cpp',
+  cpp_args: cpp_args,
+  dependencies: deps,
+  install: true,
+  install_dir: get_option('bindir'))
