@@ -23,7 +23,7 @@ deps = [
 ]
 
 executable(
-  'sdbusplus-server',
+  'dbusbench-sdbusplus-server',
   'sdbusplus-server.cpp',
   cpp_args: cpp_args,
   dependencies: deps,
@@ -31,7 +31,7 @@ executable(
   install_dir: get_option('bindir'))
 
 executable(
-  'sdbusplus-client',
+  'dbusbench-sdbusplus-client',
   'sdbusplus-client.cpp',
   cpp_args: cpp_args,
   dependencies: deps,
@@ -39,7 +39,7 @@ executable(
   install_dir: get_option('bindir'))
 
 executable(
-  'sdbus-server',
+  'dbusbench-sdbus-server',
   'sdbus-server.c',
   c_args: [],
   dependencies: dependency('libsystemd'),
@@ -47,7 +47,7 @@ executable(
   install_dir: get_option('bindir'))
 
 executable(
-  'sdbus-client',
+  'dbusbench-sdbus-client',
   'sdbus-client.c',
   c_args: [],
   dependencies: dependency('libsystemd'),
