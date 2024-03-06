@@ -53,3 +53,8 @@ executable(
   dependencies: dependency('libsystemd'),
   install: true,
   install_dir: get_option('bindir'))
+
+install_data(
+  'run-dbus-benchmark.sh',
+  install_mode: 'rwxr-xr-x',
+  install_dir: get_option('bindir'))
