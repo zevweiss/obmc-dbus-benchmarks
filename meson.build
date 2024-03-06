@@ -1,5 +1,6 @@
 project(
     'c-dbus-bench',
+    'c',
     'cpp',
     default_options: [
         'warning_level=3',
@@ -34,5 +35,21 @@ executable(
   'sdbusplus-client.cpp',
   cpp_args: cpp_args,
   dependencies: deps,
+  install: true,
+  install_dir: get_option('bindir'))
+
+executable(
+  'sdbus-server',
+  'sdbus-server.c',
+  c_args: [],
+  dependencies: dependency('libsystemd'),
+  install: true,
+  install_dir: get_option('bindir'))
+
+executable(
+  'sdbus-client',
+  'sdbus-client.c',
+  c_args: [],
+  dependencies: dependency('libsystemd'),
   install: true,
   install_dir: get_option('bindir'))
