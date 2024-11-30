@@ -6,7 +6,7 @@ project(
         'warning_level=3',
         'cpp_std=c++23'
     ],
-    license: 'Apache-2.0',
+    license: 'ISC',
     version: '0.1',
     meson_version: '>=1.1.1',
 )
